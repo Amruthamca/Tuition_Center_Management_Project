@@ -1,0 +1,45 @@
+{% extends 'navbar2.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5"> 
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Student Attendance</h5><br>
+                    <form method="post" action="{% url 'view_student_attendance_list' %}">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="sel" class="col-sm-3 col-form-label">Select Student:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="sel" name="sel" required>
+                                    {% for student in stud_names %}
+                                        <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="s_date" class="col-sm-3 col-form-label">Start Date:</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="s_date" name="s_date" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="e_date" class="col-sm-3 col-form-label">End Date:</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="e_date" name="e_date" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-9 offset-sm-3">
+                                <button type="submit" class="btn btn-secondary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

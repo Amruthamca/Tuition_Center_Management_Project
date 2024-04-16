@@ -1,0 +1,22 @@
+{% extends 'navbar3.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h3 class="text-center">Course Details</h3><br>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title ">{{ u.course.coursename }}</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item">Course Duration: {{ u.course.duration }}</li>
+                        <li class="list-group-item">Course Fee: {{ u.course.fee }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

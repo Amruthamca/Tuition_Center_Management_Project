@@ -1,0 +1,38 @@
+{% extends 'navbar3.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'edit_profile' %}" class="btn btn-sm btn-secondary">Edit</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="profile-page">
+                        <div class="profile-picture-container" style="width: 150px; height: 110px; border-radius: 60%; overflow: hidden;">
+                            <img src="{{ s.image.url }}" style="width: 100%; height: 100%;" >
+                        </div>
+                        <h2 class="profile-name">{{ s.user.username }}</h2>
+                        <p class="profile-role">{{ s.course.coursename }}</p> 
+                        <div class="profile-details">
+                            <p><strong>First name:</strong> {{ s.user.first_name }}</p>
+                            <p><strong>Last name:</strong> {{ s.user.last_name }}</p>
+                            <p><strong>Email:</strong> {{ s.user.email }}</p>
+                            <p><strong>Age:</strong> {{ s.age }}</p>
+                            <p><strong>Contact number:</strong> {{ s.contact }}</p>
+                            {% if s.current_teacher %}
+                            <p><strong>Teacher:</strong> {{ s.current_teacher.first_name }} {{ s.current_teacher.last_name }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

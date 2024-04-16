@@ -1,0 +1,47 @@
+{% extends 'navbar1.html' %}
+{% block content %}
+
+<style>
+    .table-dec{
+        height: 400px;
+    }
+</style>
+
+<h3 class="text-center mt-2">Approved Teachers</h3>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10"> 
+            <div class="table-responsive table-dec">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                            <th>Contact Number</th>
+                            <th>Profile Picture</th>
+                            <th>Course</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in teach %}
+                            {% if t.user.status == 1 and t.user.user_type == '2' %}
+                                <tr>
+                                    <td>{{ t.user.username }}</td>
+                                    <td>{{ t.user.email }}</td>
+                                    <td>{{ t.age }}</td>
+                                    <td>{{ t.contact }}</td>
+                                    <td><img src="{{ t.image.url }}" style="width: 50px; height: 50px;"></td>
+                                    <td>{{ t.course.coursename }}</td>
+                                    <td><a href="{% url 'delete_teacher' t.id %}">Delete</a></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

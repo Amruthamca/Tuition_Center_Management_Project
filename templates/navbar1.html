@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    {% load static %}
+    <style>
+    @media (min-width:992px) {    
+    .vertical-nav {
+        position:fixed;
+        top: 55px; 
+        left: 0;
+        width: 200px;
+        height: 100%;
+        background-color: #f8f8f8;
+        overflow-y: auto;
+        padding-top: 10px;
+        font-size: smaller;
+    }
+
+    li {
+        padding: 1px;
+    }
+
+    li:hover {
+        background-color: blueviolet;
+    }
+
+    .content {
+        margin-left: 220px;
+        margin-top: 60px; 
+        overflow-x: hidden;
+        padding: 20px; 
+    }
+
+    .align {
+        margin-left: 280px;
+        font-size: 1.5rem; 
+    }
+
+    .card-title {
+        font-size: 1.5rem; 
+    }
+}
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-secondary">
+        <a class="navbar-brand text-white" href="#">
+            <img src="{% static 'images/logo.jpeg' %}" style="width: 50px;height: 40px;"> Career Guide 
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto flex-column vertical-nav navbar-dark bg-secondary ">
+                <p class="text-white pl-3"><i class="fas fa-cogs"></i><b> Admin menu</b></p>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'adminhome' %}"><i class="fas fa-home"></i>  Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'approve_disapprove' %}">
+                        <i class="fas fa-bell"></i> Notification 
+                        <span class="badge badge-danger">{{ pending_requests_count }}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'course' %}"><i class="fas fa-book"></i>  Course Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'view_course' %}"><i class="fas fa-book"></i>  Manage Course</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'show_teacher' %}"><i class="fas fa-chalkboard-teacher"></i>  Teacher</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'assign' %}"><i class="fas fa-user-plus"></i>  Assign Teacher</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'add_tattendance' %}"><i class="fas fa-clipboard-list"></i>  Teacher Attendance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'view_tattendance' %}"><i class="fas fa-book"></i>  View Teachers Attendance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'show_student' %}"><i class="fas fa-user-graduate"></i>  Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'view_studattendance' %}"> <i class="fas fa-clipboard-list"></i> View Student Attendance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'approve_disapprove' %}"><i class="fas fa-book"></i>  Approve and Disapprove</a>
+                </li>
+               
+            </ul>
+        </div>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" >
+                <a class="btn btn-danger" href="{% url 'logout1' %}">Logout</a>
+            </li>
+        </ul>      
+    </nav><br>
+    {% block content %}
+    {% endblock %}
+    </body>
+    </html>

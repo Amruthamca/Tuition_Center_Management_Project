@@ -1,0 +1,38 @@
+{% extends 'navbar1.html' %}
+{% block content %}
+
+<style>
+    .table-dec{
+        height: 400px;
+    }
+</style>
+
+<h3 class="text-center mt-2">COURSE DETAILS</h3><br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-9"> 
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                  
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Course Duration</th>
+                            <th>Course Syllabus</th>
+                            <th>Course Fee</th>
+                            <!-- <th>Action</th> -->
+                        </tr>
+                        {% for c in courses %}
+                        <tr>
+                            <td>{{ c.coursename }}</td>
+                            <td>{{ c.duration }}</td>
+                            <td><a href="{{ c.syllabus.url }}">{{ c.syllabus.name }}</a></td> 
+                            <td>{{ c.fee }}</td>
+                        </tr>
+                        {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

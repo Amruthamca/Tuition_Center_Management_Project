@@ -1,0 +1,79 @@
+{% extends 'navbar.html' %}
+{% block content %}
+
+<style>
+    .custom-card {
+      width: 400px; 
+      padding: 20px; 
+      margin-top: 20px; 
+    }
+  </style>
+  <body>
+    {% for message in messages %}
+        <div class="alert alert-light mt-5" style="width: 50%; margin: 0 auto;">
+            {{ message }}
+        </div>
+    {% endfor %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card custom-card">
+          <div class="card-header">
+            <h5 class="card-title mb-0 text-center">Student Registration</h5>
+          </div>
+          <div class="card-body p-2">
+            <form action="{% url 'sregistration' %}" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="mb-2">
+                <label for="fname" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="fname" name="fname" required>
+              </div>
+              <div class="mb-2">
+                <label for="lname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lname" name="lname" required>
+              </div>
+              <div class="mb-2">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="uname" name="uname" required>
+              </div>
+              <div class="mb-2">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" class="form-control" id="age" name="age" required>
+              </div>
+              <div class="mb-2">
+                <label for="num" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" id="num" name="num" pattern="[0-9]{10}" title="Please enter a 10-digit number" required>
+                <div class="invalid-feedback">Please enter a valid 10-digit number.</div>
+            </div>
+            
+            <div class="mb-2">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+              <div class="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+          
+              <div class="mb-2">
+                <input type="hidden" name="text" value="3">
+              </div>
+              <div class="mb-2">
+                <label for="image" class="form-label">Profile picture</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+              </div>
+              <div class="form-group">
+                <select class="form-control" name="sel" required>
+                    <option value="">Select Course</option>
+                    {% for course in courses %}
+                        <option value="{{ course.id }}">{{ course.coursename }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+              <div class="text-center"> 
+                  <button type="submit" class="btn btn-warning btn-sm">Submit</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'navbar2.html' %}
+
+{% block content %}
+<h3 class="text-center mt-2">View Uploaded Tasks</h3><br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8"> 
+            {% if tasks %}
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Task Name</th>
+                                <th>Task Description</th>
+                                <th>View Task</th>
+                    
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                            <tr>
+                                <td>{{ task.student.user.first_name }} {{ task.student.user.last_name }}</td>
+                                <td>{{ task.task.task_name }}</td>
+                                <td>{{ task.description }}</td>
+                                <td>
+                                    <a href="{{ task.task_upload.url }}" target="_blank" class="btn btn-primary">View Task</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p>No tasks uploaded by students.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

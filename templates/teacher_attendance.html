@@ -1,0 +1,59 @@
+{% extends 'navbar1.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5"> 
+        <div class="col-md-5">
+            {% if messages %}
+            <div class="alert alert-success alert-dismissible" style="width: 100%; margin-bottom: 15px;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+            <div class="card">
+        <div class="card-body">
+            <h5 class="card-title text-center">Add Attendance</h5><br>
+            <form method="post" action="{% url 'teach_attend' %}">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="sel" class="col-sm-4 col-form-label text-right">Select Teacher:</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" id="sel" name="sel">
+                            <option value="">Select Teacher</option>
+                            {% for teacher in teachers %}
+                                <option value="{{ teacher.id }}">{{ teacher.first_name }} {{ teacher.last_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label text-right">Date:</label>
+                    <div class="col-sm-6">
+                        <input type="date" class="form-control" name="date">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label text-right"></label>
+                    <div class="col-sm-8">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="presentRadio" value="present">
+                            <label class="form-check-label" for="presentRadio">Present</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="absentRadio" value="absent">
+                            <label class="form-check-label" for="absentRadio">Absent</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-secondary mt-3 mx-auto d-block">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

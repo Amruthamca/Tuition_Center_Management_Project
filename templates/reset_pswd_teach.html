@@ -1,0 +1,42 @@
+{% extends 'navbar2.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            {% if messages %}
+            <div class="alert alert-danger " style="width: 100%; margin-bottom: 15px;">
+                {% for m5 in messages %}
+                    {{ m5 }}
+                {% endfor %}
+            </div>
+        {% endif %}
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{% url 'reset_password1' %}">
+                        {% csrf_token %}
+                        <h3 class="text-center">Reset Password</h3><br>
+                        <div class="form-group">
+                            <label for="old_password">Old Password</label>
+                            <input type="password" id="old_password" name="old_password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">New Password</label>
+                            <input type="password" id="password" name="password" class="form-control" required 
+                                   pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
+                                   title="Password must contain at least 6 characters, one uppercase letter, one digit, and one special character">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password">Confirm New Password</label>
+                            <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+                        </div>
+                        <div class="form-group text-center"> 
+                            <button type="submit" class="btn btn-info">Reset Password</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

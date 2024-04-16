@@ -1,0 +1,47 @@
+{% extends 'navbar2.html' %}
+{% block content %}
+
+<style>
+    .table-dec{
+        height: 400px;
+    }
+</style>
+<body>
+    {% for m in messages %}
+    <div class="alert alert-warning mt-2" style="width: 50%; margin: 0 auto;">
+        {{ m }}
+    </div>
+    {% endfor %}
+
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-5">
+                <br>
+                <div class="card"><br>
+                    <h5 class="text-center">Assign Task</h5>
+                    <div class="card-body p-4">
+                        <form action="{% url 'assign_task' %}" method="post">
+                            {% csrf_token %}
+                            <div class="mb-2">
+                                <label for="tname" class="form-label">Task Name:</label>
+                                <input type="text" class="form-control" id="tname" name="tname" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="s_date" class="form-label">Start Date:</label>
+                                <input type="date" class="form-control" id="s_date" name="s_date" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="e_date" class="form-label">End Date:</label>
+                                <input type="date" class="form-control" id="e_date" name="e_date" required>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-info">Give Task</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

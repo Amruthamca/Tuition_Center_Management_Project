@@ -1,0 +1,61 @@
+{% extends 'navbar1.html' %}
+
+{% block content %}
+
+<style>
+    .table-dec{
+        height: 400px;
+    }
+</style>
+
+<h3 class="text-center mt-2">Assign Teachers</h3>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10"> 
+            <div class="table-responsive table-dec">
+                <form >
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Course</th>
+                            <th>Student</th>
+                            <th>Student Image</th>
+                            <th>Teacher</th>
+                            <th>Current Teacher</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for s in students %}
+                        <tr>
+                            <td>{{ s.course.coursename }}</td>
+                            <td>{{ s.user.username }}</td>
+                            <td><img src="{{ s.image.url }}" alt="{{ s.user.first_name }}'s Image" style="width: 50px; height: 50px;"></td>
+                            <td>
+                                <select name="teacher" id="teacher_select_{{ s.user.id }}" class="form-control">
+                                    {% for teacher in teachers %}
+                                        {% if teacher.course.id == s.course.id %}
+                                            <option value="{{ teacher.user.id }}">{{ teacher.user.first_name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            
+                            <td>{{ s.current_teacher.username }}</td>
+                            <td><button type="button" class="btn btn-outline-secondary" onclick="assignTeacher('{{s.user.id}}')">Assign</button></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function assignTeacher(studentId){
+            console.log(studentId)
+            teacherId=document.getElementById('teacher_select_' + studentId).value;
+            console.log(teacherId)
+            var url = `/assign_teacher/${studentId}/${teacherId}/`;
+            window.location.href = url;
+}
+</script>
+</form>
+{% endblock %}
